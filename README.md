@@ -267,9 +267,291 @@ where SC.student_id=s.id and SC.Course_id=c.id and student_id=3;
 
 
 
-#Project-2 #Customer and Orders, with Products  (CRM)●Customer-Product-Orders
+##Project-2 
+
+#Customer and Orders, with Products  (CRM)●Customer-Product-Orders
+
+
+
 ![customer](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/d7161ff4-6cae-4d50-882a-09b4320f4075)
+
 ![Product order](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/3aca8e4b-d53f-4a8e-9507-5668a7dfebca)
+
+
+
+#creating the product table 
+
+create table products(
+
+id bigint not null,
+
+name varchar(29) not null,
+
+price bigint not null
+
+);
+
+describe products;
+
+#rename name column to names
+
+alter table products rename column name to names;
+
+#modify the colunm id contraints 
+
+alter table products modify column id bigint not null auto_increment primary key;
+
+#modify the colunm price contraints 
+
+alter table products modify column price decimal(10,2) not null;
+
+#inserting the data into products table
+
+insert into products (names,price) values ("Manual testing",1200);
+
+insert into products (names,price) values ("Automation testing",1999);
+
+insert into products (names,price) values ("API",1879);
+
+insert into products (names,price) values ("SQL",1699);
+
+insert into products (names,price) values ("Mobile testing",1250);
+
+insert into products (names,price) values ("Mobile testing",-100);
+
+insert into products (names,price) values ("MBA",-100);
+
+select * from products;
+
+#update a value of mobile testing course
+
+update products set price=1255.99 where id=1;
+
+update products set price=1999.89 where id=1;
+
+update products set price=1879.69 where id=1;
+
+
+
+![product](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/4d4bbf9e-13ba-4328-b7fe-36d912315302)
+
+#==================================================
+
+#project 2 customer and orders with product (CRM Project)
+
+use the_testing_academy;
+
+#creating customers table
+
+create table customer(
+
+id bigint not null auto_increment,
+
+name varchar(20) not null,
+
+primary key (id)
+
+);
+
+#describe the table
+
+describe customers;
+
+#rename the table name
+
+rename table customer to customers; 
+
+#To add new column
+
+Alter table customers add address text(30) not null;
+
+#rename column name
+
+Alter table customers rename column name to names; 
+
+#inserting the data into customers table
+
+insert into customers (names,address) values ("Amrut","pune");
+
+insert into customers (names,address) values ("Raibagi","Banglore");
+
+insert into customers (names,address) values ("Pramod","Mumbai");
+
+insert into customers (names,address) values ("Dutta","Banglore");
+
+insert into customers (names,address) values ("Renya","Gada");
+
+insert into customers (names,address) values ("raju","GADAG");
+
+select * from customers;
+
+![customers](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/6e722bc4-8f31-4a15-8dd1-fbb82aa980e5)
+
+
+#==================================================
+
+#creating orders table along with customer_id as foriegn key
+
+create table orders(
+
+id bigint not null auto_increment,
+
+order_no varchar(255) unique not null,
+
+order_date  datetime not null,
+
+customer_id bigint not null,
+
+primary key (id),
+
+foreign key (customer_id) references customers(id)
+
+);
+
+alter table orders modify column  customer_id bigint;
+
+describe orders;
+
+#inserting the data into orders table
+
+insert into orders (customer_id,order_no,order_date) values (1,"4AN5J",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (6,"7DN5D",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (4,"8QN5I",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (5,"2AO5J",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (2,"6AN5M",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (1,"6VN5M",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (1,"8RN5I",current_timestamp());
+
+insert into orders (customer_id,order_no,order_date) values (null,"8RK5I",current_timestamp());
+
+select * from orders;
+
+
+![Orders](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/edf7577f-cc88-4d50-9727-fa451f9b7510)
+
+
+#===================================================================
+
+#creating orders table along with order_id and product_id as foriegn key
+
+create table order_items(
+
+id bigint not null auto_increment primary key,
+
+total_price bigint not null,
+
+no_of_items bigint not null,
+
+order_id bigint not null,
+
+product_id bigint not null,
+
+foreign key (order_id) references orders(id),
+
+foreign key (product_id) references products(id)
+
+);
+
+describe order_items;
+
+#modify the total_price constraints
+
+alter table order_items modify column total_price decimal(10,2) not null;
+
+insert into order_items (order_id,product_id,no_of_items,total_price) values (1,4,5,2000);
+
+insert into order_items (order_id,product_id,no_of_items,total_price) values (2,2,3,1000);
+
+insert into order_items (order_id,product_id,no_of_items,total_price) values (1,3,2,2000);
+
+insert into order_items (order_id,product_id,no_of_items,total_price) values (1,5,5,5000);
+
+select * from order_items;
+
+#inner inner query for customers and orders table to fetch valid results 
+
+select *
+
+from customers c, orders o
+
+where c.id=o.customer_id
+
+order by c.id desc;
+
+#OR we can write joins like this also
+
+select *
+
+from customers c join orders o
+
+on c.id=o.customer_id
+
+order by c.id desc;
+
+#To see how many customers order something
+
+select count(distinct c.id) as no_of_people_ordered
+
+from customers c join orders o
+
+on c.id=o.customer_id;
+
+#left outer join query to fetch the data which customer is not oredered and also all data
+
+select *
+
+from customers c left join orders o
+
+on c.id=o.customer_id
+
+order by c.id desc;
+
+#left outer join query to fetch the data only which customer is not oredered
+
+select *
+
+from customers c left join orders o
+
+on c.id=o.customer_id
+
+where o.customer_id is null;
+
+#right outer join query to fetch the data only which order is not oredered
+
+select *
+
+from customers c right join orders o
+
+on c.id=o.customer_id
+
+where c.id is null;
+
+#to find sum of price sum of quantity in oerder_item
+
+select sum(total_price),sum(no_of_items) from order_items;
+
+#to find total price of each order
+
+select order_id,sum(total_price*no_of_items) from order_items group by order_id;
+
+#to find who is brought which order and how much items to join 3 table
+
+select c.id,c.names,o.id,oi.no_of_items
+
+from customers c,orders o,order_items oi
+
+where c.id=o.customer_id and o.id=oi.order_id;
+
+
+![Order_item](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/07552f11-7164-4b62-ad22-d9e742ac6f7c)
+
+
 
 
 
