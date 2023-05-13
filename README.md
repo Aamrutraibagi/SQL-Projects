@@ -2,6 +2,8 @@
 
 #Project-1 #StudentCourses 
 
+
+
 ![SQL Project 1](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/4b897964-0e4f-47f7-b7e4-a818f9537dd7)
 
 #project 1 #create studentcourses table with foreign key here using student and courses table
@@ -104,13 +106,18 @@ where s.id=c.id and c.price;
 Select * from cour_stu_info;
 
 #to create procedure here this procedure is created by using stored procedure tab
-#---------------------------------------------------------------------------------------------
+#----------------------------------------------------------
+
 #used to set the value of arg
+
 set @q_value=25
+
 #used to call procedure name it will show error but it will get executed
+
 call new_procedure(@q_value)
 
 ![Stored procedure](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/2f42e72f-cc12-4cd3-873f-8a261415d71e)
+
 ![Procedure created](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/e98d7dc2-483d-4027-a04a-12879a217d78)
 
 
