@@ -52,6 +52,7 @@ insert into Student(name,address) values("rinku",null);
 Select * from Student;
 
 # add new age column
+
 Alter table Student add column (age bigint not null);
 update Student set age=23 where id=1;
 update Student set age=22 where id=2;
@@ -60,6 +61,7 @@ update Student set age=26 where id=4;
 update Student set age=22 where id=6;
 
 # add new Phone column
+
 Alter table Student add column (Phone bigint not null);
 update Student set Phone=7795040636 where id=1;
 update Student set Phone=7795040436 where id=2;
@@ -78,7 +80,8 @@ Select * from Stu_ifo;
 
 
 #to create view of students and courses table  to know who have brought courses less than 800
-#---------------------------------------------------------------------------------------------
+#---------------------------------------------------------
+
 create view cour_stu_info as 
 select s.name,c.price
 from Student s,courses c
@@ -91,7 +94,8 @@ Select * from cour_stu_info;
 drop view cour_stu_info;
 
 #to create view of students and courses table  to know who have brought courses less than 800
-#----------------------------------------------------------------------------------------------
+#---------------------------------------------------
+
 create view cour_stu_info as 
 select s.name,c.name as coursenames,c.price
 from Student s,courses c
@@ -111,6 +115,8 @@ call new_procedure(@q_value)
 
 
 #========================================================================================================================================
+
+
 #create table courses
 
 use the_testing_academy;
@@ -132,9 +138,11 @@ insert into courses(name,price) values("Mobile testing",800);
 Select * from courses;
 
 # Student table taken from Query1
+
 select * from Student;
 
 # modifying the value of adress for name rinku
+
 update student set address='Bagalkot' where name='rinku';
 
 
@@ -142,6 +150,7 @@ update student set address='Bagalkot' where name='rinku';
 
 
 #create studentcourses table with foreign key here using student and courses table
+
 use the_testing_academy;
 
 create table StudentCourse(
@@ -150,6 +159,7 @@ Course_id bigint not null
 )
 
 select * from Student;
+
 Select * from courses;
 
 Alter table StudentCourse add foreign key(student_id) references Student(id);
