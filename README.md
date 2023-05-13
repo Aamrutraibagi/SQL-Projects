@@ -263,6 +263,19 @@ from Student s,courses c,StudentCourse SC
 
 where SC.student_id=s.id and SC.Course_id=c.id and student_id=3;
 
+#==================================================================================================================================================
+
+
+
+#Project-2 #Customer and Orders, with Products  (CRM)●Customer-Product-Orders
+![customer](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/d7161ff4-6cae-4d50-882a-09b4320f4075)
+![Product order](https://github.com/Aamrutraibagi/SQL-Projects/assets/120326509/3aca8e4b-d53f-4a8e-9507-5668a7dfebca)
+
+
+
+
+
+
 
 
 
